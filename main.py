@@ -6,7 +6,7 @@ from CONSTANTS import *
 
 # Defina URLs das imagens para cada resultado
 IMAGES = {
-    "natural": "./images/d8.svg",
+    "natural": "https://github.com/gothmate/verbum_dice_roller/blob/dev/images/d8.svg",
     "social": "https://atlas-content-cdn.pixelsquid.com/stock-images/polyhedral-8-sided-dice-rA3VKMF-600.jpg",
     "racional": "https://atlas-content-cdn.pixelsquid.com/stock-images/polyhedral-8-sided-dice-rA3VKMF-600.jpg"
 }

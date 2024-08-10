@@ -1,5 +1,5 @@
-**BOT ROLADOR DE DADOS PARA O SISTEMA VERBUM**
-  # Funções:
+# BOT ROLADOR DE DADOS PARA O SISTEMA VERBUM**
+  **Funções:**
     - /hello
       - Testa o bot dando um Olá.
     - /roll-one 
@@ -9,6 +9,6 @@
     - /roll-nr7
       - Rola 3 dados com dificuldade alta com sucessos em resultados 7 ou 8
 
-  # Para criar um executável é necessário instalar o pyinstaller globalmente e executar o comando:
+  **Para criar um executável é necessário instalar o pyinstaller globalmente e executar o comando:**
     - pyinstaller --hidden-import CONSTANTS --onefile main.py
 

@@ -4,16 +4,38 @@ from nextcord.ext import commands
 import random
 from CONSTANTS import *
 
-# Defina URLs das imagens para cada resultado
 IMAGES = {
-    "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/1.png",
-    "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/2.png",
-    "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/3.png",
-    "res4": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/4.png",
-    "res5": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/5.png",
-    "res6": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/6.png",
-    "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/7.png",
-    "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/8.png",
+    "amarelo": {
+        "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/1.png",
+        "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/2.png",
+        "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/3.png",
+        "res4": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/4.png",
+        "res5": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/5.png",
+        "res6": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/6.png",
+        "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/7.png",
+        "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/8.png",
+    },
+    "preto": {
+        "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/1.png",
+        "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/2.png",
+        "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/3.png",
+        "res4": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/4.png",
+        "res5": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/5.png",
+        "res6": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/6.png",
+        "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/7.png",
+        "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/8.png",
+    },
+    "vermelho": {
+        "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/1.png",
+        "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/2.png",
+        "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/3.png",
+        "res4": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/4.png",
+        "res5": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/5.png",
+        "res6": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/6.png",
+        "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/7.png",
+        "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/8.png",
+    }
+    
 }
 
 emoji_custom = "<:VerbumRPG:1158569919424774236>"
@@ -75,9 +97,9 @@ async def rollcommand1(interaction: Interaction):
                 value[0]} - {f'Atingiu o N.R.  {emoji_custom}' if value[1] == True else f'Não atingiu o N.R. {emotive}'}",
             color=0x00ff00 if value[1] == True else 0xff0000
         )
-        for key in IMAGES:
+        for key in IMAGES['vermelho']:
             if int(key[-1]) == value[0]:
-                embed.set_image(url=IMAGES[key])
+                embed.set_image(url=IMAGES['vermelho'][key])
                 embeds.append(embed)
 
     # Enviando os embeds

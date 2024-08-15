@@ -5,7 +5,7 @@ import random
 from CONSTANTS import *
 
 IMAGES = {
-    "amarelo": {
+    "natural": {
         "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/1.png",
         "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/2.png",
         "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/3.png",
@@ -15,7 +15,7 @@ IMAGES = {
         "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/7.png",
         "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/amarelo/8.png",
     },
-    "preto": {
+    "social": {
         "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/1.png",
         "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/2.png",
         "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/3.png",
@@ -25,7 +25,7 @@ IMAGES = {
         "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/7.png",
         "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/preto/8.png",
     },
-    "vermelho": {
+    "racional": {
         "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/1.png",
         "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/2.png",
         "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/vermelho/3.png",
@@ -88,34 +88,40 @@ async def rollcommand1(interaction: Interaction):
     numero_de_sucessos = contar_sucessos(diceList)
     resultado = select_response(numero_de_sucessos)
 
-    # Criando os embeds com imagens diferentes
     embeds = []
+    nivel = ''
+    await interaction.channel.send(f"Resultado NR-4 para {username} em #{channel}")
     for key, value in diceList.items():
+        if numero_de_sucessos == 0:
+            nivel = 'Resultado Irrelevante'
+        if numero_de_sucessos == 1:
+            nivel = 'Resultado Medíocre'
+        if numero_de_sucessos == 2:
+            nivel = 'Resultado Satisfatório'
+        if numero_de_sucessos == 3:
+            nivel = 'Resultado Excepcional'
+
         embed = nextcord.Embed(
-            title=f"Resultado NR-4 para {username} em #{channel}",
+            title='',
             description=f"{key}: {
                 value[0]} - {f'Atingiu o N.R.  {emoji_custom}' if value[1] == True else f'Não atingiu o N.R. {emotive}'}",
             color=0x00ff00 if value[1] == True else 0xff0000
         )
-        for key in IMAGES['vermelho']:
-            if int(key[-1]) == value[0]:
-                embed.set_image(url=IMAGES['vermelho'][key])
+        for chave in IMAGES[key]:
+            if int(chave[-1]) == value[0]:
+                embed.set_image(url=IMAGES[key][chave])
                 embeds.append(embed)
 
-    # Enviando os embeds
     for embed in embeds:
-        print(f'{embed.title}')
-        print(f'{embed.description}')
-        await interaction.channel.send(embed=embed)
+       await interaction.channel.send(embed=embed)
 
-    # Enviando a mensagem final com o resultado
-    print(f'\n{numero_de_sucessos} sucessos!\n{resultado}')
     await interaction.channel.send(
-        f'{numero_de_sucessos} sucessos!\n{resultado}'
+        f'{nivel} - {numero_de_sucessos} sucesso(s).\n{resultado}'
     )
 
+
 @client.slash_command(name='roll-nr7', description="rola 3 dados de 8 lados.")
-async def rollcommand2(interaction: Interaction):
+async def rollcommand1(interaction: Interaction):
 
     username = interaction.user.name
     channel = interaction.channel
@@ -127,7 +133,7 @@ async def rollcommand2(interaction: Interaction):
     sucessOne = sucess_decision(firstDie, 7)
     sucessTwo = sucess_decision(secondDie, 7)
     sucessThree = sucess_decision(thirdDie, 7)
-    
+
     diceList = {
         "natural": [firstDie, sucessOne],
         "social": [secondDie, sucessTwo],
@@ -136,32 +142,38 @@ async def rollcommand2(interaction: Interaction):
 
     numero_de_sucessos = contar_sucessos(diceList)
     resultado = select_response(numero_de_sucessos)
-        
-    # Criando os embeds com imagens diferentes
+
     embeds = []
+    nivel = ''
+    await interaction.channel.send(f"Resultado NR-7 para {username} em #{channel}")
     for key, value in diceList.items():
+        if numero_de_sucessos == 0:
+            nivel = 'Resultado Irrelevante'
+        if numero_de_sucessos == 1:
+            nivel = 'Resultado Medíocre'
+        if numero_de_sucessos == 2:
+            nivel = 'Resultado Satisfatório'
+        if numero_de_sucessos == 3:
+            nivel = 'Resultado Excepcional'
+
         embed = nextcord.Embed(
-            title=f"Resultado NR-7 para {username} em #{channel}",
-            description=f"{key}: {value[0]} - {f'Atingiu o N.R. {emoji_custom}' if value[1]
-                                               == True else f'Não atingiu o N.R. {emotive}'}",
+            title='',
+            description=f"{key}: {
+                value[0]} - {f'Atingiu o N.R.  {emoji_custom}' if value[1] == True else f'Não atingiu o N.R. {emotive}'}",
             color=0x00ff00 if value[1] == True else 0xff0000
         )
-        for key in IMAGES:
-            if int(key[-1]) == value[0]:
-                embed.set_image(url=IMAGES[key])
+        for chave in IMAGES[key]:
+            if int(chave[-1]) == value[0]:
+                embed.set_image(url=IMAGES[key][chave])
                 embeds.append(embed)
 
-    # Enviando os embeds
     for embed in embeds:
-        print(f'{embed.title}')
-        print(f'{embed.description}')
-        await interaction.channel.send(embed=embed)
+       await interaction.channel.send(embed=embed)
 
-    # Enviando a mensagem final com o resultado
-    print(f'\n{numero_de_sucessos} sucessos!\n{resultado}')
     await interaction.channel.send(
-        f'{numero_de_sucessos} sucessos!\n{resultado}'
+        f'{nivel} - {numero_de_sucessos} sucesso(s).\n{resultado}'
     )
+
 
 @client.slash_command(name='roll-one', description="rola 1 dado de 8 lados.")
 async def rollcommand3(interaction: Interaction):
@@ -187,9 +199,9 @@ async def rollcommand3(interaction: Interaction):
         description=f"O dado rolado por {username} em #{channel}, resultou em {roll} - {msg}",
         color=0x00ff00 if sucess == True else 0xff0000
     )
-    for key in IMAGES:
+    for key in IMAGES['vermelho']:
         if int(key[-1]) == roll:
-            embed.set_image(url=IMAGES[key])
+            embed.set_image(url=IMAGES['vermelho'][key])
 
     # Enviando os embeds
     await interaction.channel.send(embed=embed)

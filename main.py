@@ -38,14 +38,6 @@ IMAGES = {
     
 }
 
-emoji_custom = "<:VerbumRPG:1158569919424774236>"
-emotive = ":face_holding_back_tears:"
-
-resp_falha = ["Ihhhh....", "Corre que deu ruim!", "Daí pra pior."]
-resp_1_successo = ["Podia ser melhor.", "É, dá pro gasto.", "Entrou raspando."]
-resp_2_successos = ["Se deu bem.", "Bom demais.", "A sorte está do seu lado."]
-resp_3_successos = ["Melhor dos melhores.", "Vez ou outra, o universo se alinha.", "Esse resultado nunca mais... :O"]
-
 intents = nextcord.Intents.default()
 intents.members = True
 intents.emojis = True
@@ -81,12 +73,11 @@ async def rollcommand1(interaction: Interaction):
 
     diceList = {
         "natural": [firstDie, sucessOne],
-        "social": [secondDie, sucessTwo],
         "racional": [thirdDie, sucessThree],
+        "social": [secondDie, sucessTwo],
     }
 
     numero_de_sucessos = contar_sucessos(diceList)
-    resultado = select_response(numero_de_sucessos)
 
     embeds = []
     nivel = ''
@@ -104,7 +95,7 @@ async def rollcommand1(interaction: Interaction):
         embed = nextcord.Embed(
             title='',
             description=f"{key}: {
-                value[0]} - {f'Atingiu o N.R.  {emoji_custom}' if value[1] == True else f'Não atingiu o N.R. {emotive}'}",
+                value[0]} - {'Atingiu o N.R.' if value[1] == True else 'Não atingiu o N.R.'}",
             color=0x00ff00 if value[1] == True else 0xff0000
         )
         for chave in IMAGES[key]:
@@ -115,9 +106,7 @@ async def rollcommand1(interaction: Interaction):
     for embed in embeds:
        await interaction.channel.send(embed=embed)
 
-    await interaction.channel.send(
-        f'{nivel} - {numero_de_sucessos} sucesso(s).\n{resultado}'
-    )
+    await interaction.channel.send(nivel)
 
 
 @client.slash_command(name='roll-nr7', description="rola 3 dados de 8 lados.")
@@ -136,12 +125,11 @@ async def rollcommand1(interaction: Interaction):
 
     diceList = {
         "natural": [firstDie, sucessOne],
-        "social": [secondDie, sucessTwo],
         "racional": [thirdDie, sucessThree],
+        "social": [secondDie, sucessTwo],
     }
 
     numero_de_sucessos = contar_sucessos(diceList)
-    resultado = select_response(numero_de_sucessos)
 
     embeds = []
     nivel = ''
@@ -159,7 +147,7 @@ async def rollcommand1(interaction: Interaction):
         embed = nextcord.Embed(
             title='',
             description=f"{key}: {
-                value[0]} - {f'Atingiu o N.R.  {emoji_custom}' if value[1] == True else f'Não atingiu o N.R. {emotive}'}",
+                value[0]} - {'Atingiu o N.R.' if value[1] == True else 'Não atingiu o N.R.'}",
             color=0x00ff00 if value[1] == True else 0xff0000
         )
         for chave in IMAGES[key]:
@@ -170,9 +158,7 @@ async def rollcommand1(interaction: Interaction):
     for embed in embeds:
        await interaction.channel.send(embed=embed)
 
-    await interaction.channel.send(
-        f'{nivel} - {numero_de_sucessos} sucesso(s).\n{resultado}'
-    )
+    await interaction.channel.send(nivel)
 
 
 @client.slash_command(name='roll-one', description="rola 1 dado de 8 lados.")
@@ -195,13 +181,13 @@ async def rollcommand3(interaction: Interaction):
         msg = "Não atingiu o N.R."
 
     embed = nextcord.Embed(
-        title="Resultado",
-        description=f"O dado rolado por {username} em #{channel}, resultou em {roll} - {msg}",
+        title="",
+        description=f"O dado rolado por {username} em #{channel} {msg}",
         color=0x00ff00 if sucess == True else 0xff0000
     )
-    for key in IMAGES['vermelho']:
+    for key in IMAGES['racional']:
         if int(key[-1]) == roll:
-            embed.set_image(url=IMAGES['vermelho'][key])
+            embed.set_image(url=IMAGES['racional'][key])
 
     # Enviando os embeds
     await interaction.channel.send(embed=embed)
@@ -214,22 +200,5 @@ def sucess_decision(die_result, dif):
         return True
     else:
         return False
-    
-def select_response(sucessos):
-    if sucessos == 0:
-        res_aleatorio = random.randint(0, 2)
-        resultado = resp_falha[res_aleatorio]
-    if sucessos == 1:
-        res_aleatorio = random.randint(0, 2)
-        resultado = resp_1_successo[res_aleatorio]
-    if sucessos == 2:
-        res_aleatorio = random.randint(0, 2)
-        resultado = resp_2_successos[res_aleatorio]
-    if sucessos == 3:
-        res_aleatorio = random.randint(0, 2)
-        resultado = resp_3_successos[res_aleatorio]
-        
-    return resultado
-
 
 client.run(BOT_TOKEN)

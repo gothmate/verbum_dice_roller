@@ -1,7 +1,5 @@
 # BOT ROLADOR DE DADOS PARA O SISTEMA VERBUM
   ## Funções:
-    - /hello
-      - Testa o bot dando um Olá.
     - /roll-one 
       - Rola um dado para o Narrador
     - /roll-nr4

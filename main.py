@@ -1,7 +1,7 @@
 import nextcord
 from nextcord import Interaction
 from nextcord.ext import commands
-import random
+from functions import *
 from CONSTANTS import *
 
 IMAGES = {
@@ -58,37 +58,14 @@ async def on_ready():
     print(f'{client.user} has connected to Discord!')
     print("-----------------------------------------")
 
-ServerID = 1270162128992600155
-
-@client.slash_command(name='hello', description="Diz Olá", guild_ids=[ServerID])
-async def hellocommand(interaction: Interaction):
-    print(interaction.channel)
-    await interaction.response.send_message(f'Olá.')
-
 @client.slash_command(name='roll-nr4', description="rola 3 dados de 8 lados.")
 async def rollcommand1(interaction: Interaction):
-
     username = interaction.user.name
     channel = interaction.channel
-
-    firstDie = random.randint(1, 8)
-    secondDie = random.randint(1, 8)
-    thirdDie = random.randint(1, 8)
-
-    sucessOne = sucess_decision(firstDie, 4)
-    sucessTwo = sucess_decision(secondDie, 4)
-    sucessThree = sucess_decision(thirdDie, 4)
-
-    diceList = {
-        "natural": [firstDie, sucessOne],
-        "racional": [thirdDie, sucessThree],
-        "social": [secondDie, sucessTwo],
-    }
-
+    diceList = rollDice()
     numero_de_sucessos = contar_sucessos(diceList)
-
     embeds = []
-    nivel = ''
+    
     await interaction.channel.send(f"Resultado NR-4 para {username} em #{channel}")
     for key, value in diceList.items():
         if numero_de_sucessos == 0:
@@ -119,26 +96,12 @@ async def rollcommand1(interaction: Interaction):
 
 @client.slash_command(name='roll-nr7', description="rola 3 dados de 8 lados.")
 async def rollcommand1(interaction: Interaction):
-
     username = interaction.user.name
     channel = interaction.channel
-
-    firstDie = random.randint(1, 8)
-    secondDie = random.randint(1, 8)
-    thirdDie = random.randint(1, 8)
-
-    sucessOne = sucess_decision(firstDie, 7)
-    sucessTwo = sucess_decision(secondDie, 7)
-    sucessThree = sucess_decision(thirdDie, 7)
-    diceList = {
-        "natural": [firstDie, sucessOne],
-        "racional": [thirdDie, sucessThree],
-        "social": [secondDie, sucessTwo],
-    }
-
+    diceList = rollDice()
     numero_de_sucessos = contar_sucessos(diceList)
     embeds = []
-    nivel = ''
+    
     await interaction.channel.send(f"Resultado NR-7 para {username} em #{channel}")
     for key, value in diceList.items():
         if numero_de_sucessos == 0:
@@ -195,16 +158,6 @@ async def rollcommand3(interaction: Interaction):
         if int(key[-1]) == roll:
             embed.set_image(url=IMAGES['racional'][key])
 
-    # Enviando os embeds
     await interaction.channel.send(embed=embed)
-
-def contar_sucessos(dice_list):
-    return sum(1 for result in dice_list.values() if result[1] == True)
-
-def sucess_decision(die_result, dif):
-    if die_result == dif or die_result == 8:
-        return True
-    else:
-        return False
 
 client.run(BOT_TOKEN)

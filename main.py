@@ -6,14 +6,14 @@ from CONSTANTS import *
 
 # Defina URLs das imagens para cada resultado
 IMAGES = {
-    "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/1.png",
-    "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/2.png",
-    "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/3.png",
-    "res4": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/4.png",
-    "res5": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/5.png",
-    "res6": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/6.png",
-    "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/7.png",
-    "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/8.png",
+    "res1": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v1.png",
+    "res2": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v2.png",
+    "res3": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v3.png",
+    "res4": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v4.png",
+    "res5": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v5.png",
+    "res6": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v6.png",
+    "res7": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v7.png",
+    "res8": "https://raw.githubusercontent.com/gothmate/verbum_dice_roller/dev/images/v8.png",
 }
 
 emoji_custom = "<:VerbumRPG:1158569919424774236>"
